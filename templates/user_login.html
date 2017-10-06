@@ -177,12 +177,45 @@ background: #DD4B39;
 </div>
 
 <div class="right">
+  <form  action="" method="post">
   <span class="loginwith">Sign in with<br />social network</span>
 
-  <button class="social-signin facebook">Log in with facebook</button>
-  <button class="social-signin twitter">Log in with Twitter</button>
-  <button class="social-signin google">Log in with Google+</button>
+  <button id= "facebook" class="social-signin facebook" type="button">Log in with facebook</button>
+  <button id = "twitter" class="social-signin twitter" type="button">Log in with Twitter</button>
+  <button id="google" class="social-signin google" type="button">Log in with Google+</button><!--must have redirect to method for google login -->
+</form>
 </div>
 <div class="or">OR</div>
 </div>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script>
+$("#google").click(function () {
+    $.ajax({
+        type: 'GET',
+        url: "/login_with_google",
+        success: function (data) {
+          $(location).attr('href','http://127.0.0.1:5000/login_with_google');
+        }
+      });
+  });
+  $("#twitter").click(function () {
+      $.ajax({
+          type: 'GET',
+          url: "/login_with_twitter",
+          success: function (data) {
+            $(location).attr('href','http://127.0.0.1:5000/login_with_twitter');
+          }
+        });
+    });
+    $("#facebook").click(function () {
+        $.ajax({
+            type: 'GET',
+            url: "/login_with_facebook",
+            success: function (data) {
+              $(location).attr('href','http://127.0.0.1:5000/login_with_facebook');
+            }
+          });
+      });
+  </script>
 </html>
+
