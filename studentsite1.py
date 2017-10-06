@@ -1,9 +1,11 @@
 import flask
 app = flask.Flask(__name__)
-#TODO: implement user registration form
-#TODO: Create template for logged in user
-#TODO: create user class
-#IDEA: buttons on user registration form for social media registration can link to function that will automatically handle login
+#NEED: navigation bar
+class User:
+    def __init__(self, name):
+        self.name = "Guest" if name is None else name
+
+user = User(None)
 @app.route("/")
 def home_page():
     return flask.render_template('home.html')
@@ -32,6 +34,27 @@ def twitter_login():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     pass
+
+
+@app.route("/form_data", methods=["GET", "POST"])
+def user_signin():
+    if flask.request.method == "POST":
+        email = flask.request.form["email"]
+        username = flask.request.form["username"]
+        password = flask.request.form["password"]
+        name = flask.request.form["name"]
+        lastname = flask.request.form["lastname"]
+        password2 = flask.request.form['password2']
+        print [email, username, password, password2, name, lastname] #if password and password2 do not match, return html form with error message on top
+        return flask.redirect("/")#here, will have to redirect to login page, not homepage
+    else:
+        return flask.render_template("user_login.html", username_taken = '', password_issue = '')
+
+
+if __name__=="__main__":
+	app.debug = True;
+app.run()
+
 
 
 @app.route("/form_data", methods=["GET", "POST"])
