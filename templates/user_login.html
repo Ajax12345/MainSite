@@ -26,7 +26,7 @@ h3
 position: relative;
 margin: 5% auto;
 width: 600px;
-height: 400px;
+height: 600px;
 background: #FFF;
 border-radius: 2px;
 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
@@ -47,6 +47,25 @@ margin: 0 0 20px 0;
 font-weight: 300;
 font-size: 28px;
 }
+
+input[type="submit"]:active {
+opacity: 1;
+box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+transition: 0.1s ease;
+}
+input[type="submit"]:active {
+opacity: 1;
+box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+transition: 0.1s ease;
+}
+
+input[type="submit"]:hover,
+input[type="submit"]:focus {
+opacity: 0.8;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+transition: 0.1s ease;
+}
+
 
 input[type="text"],
 input[type="password"] {
@@ -119,7 +138,7 @@ right: 0;
 box-sizing: border-box;
 padding: 40px;
 width: 300px;
-height: 400px;
+height: 600px;
 background: url('https://goo.gl/YbktSj');
 background-size: cover;
 background-position: center;
@@ -174,6 +193,8 @@ background: #DD4B39;
 <div class="left">
   <h1>Sign up</h1>
 <form  action="" method="post">
+  <input type="text" name="name" placeholder="Name" />
+  <input type="text" name="lastname" placeholder="Lastname" />
   <h2>{{username_taken}}</h2>
   <input type="text" name="username" placeholder="Username" />
   <input type="text" name="email" placeholder="E-mail" />
@@ -181,6 +202,8 @@ background: #DD4B39;
   <input type="password" name="password" placeholder="Password" />
   <h4>{{password_issue}}</h4>
   <input type="password" name="password2" placeholder="Retype password" />
+
+
 
   <input type="submit" name="signup_submit" value="Sign me up" />
 </form>
