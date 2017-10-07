@@ -21,12 +21,16 @@ h3
 {
   color:red;
 }
+h4
+{
+  color:red;
+}
 
 #login-box {
 position: relative;
 margin: 5% auto;
 width: 600px;
-height: 600px;
+height: 710px;
 background: #FFF;
 border-radius: 2px;
 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
@@ -138,7 +142,7 @@ right: 0;
 box-sizing: border-box;
 padding: 40px;
 width: 300px;
-height: 600px;
+height: 710px;
 background: url('https://goo.gl/YbktSj');
 background-size: cover;
 background-position: center;
@@ -193,14 +197,18 @@ background: #DD4B39;
 <div class="left">
   <h1>Sign up</h1>
 <form  action="" method="post">
+  <h2>{{incomplete}}<h2>
   <input type="text" name="name" placeholder="Name" />
   <input type="text" name="lastname" placeholder="Lastname" />
+  <h2>{{age_issue}}</h2>
+  <input type="text" name="age" placeholder="Age" />
   <h2>{{username_taken}}</h2>
   <input type="text" name="username" placeholder="Username" />
+  <h2>{{email_taken}}</h2>
   <input type="text" name="email" placeholder="E-mail" />
 
   <input type="password" name="password" placeholder="Password" />
-  <h4>{{password_issue}}</h4>
+  <h2>{{password_issue}}</h2>
   <input type="password" name="password2" placeholder="Retype password" />
 
 
