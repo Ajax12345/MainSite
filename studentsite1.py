@@ -1,9 +1,14 @@
 import flask
+import db_interaction
 app = flask.Flask(__name__)
 #NEED: navigation bar
+#TODO: add email verification
+
 class User:
     def __init__(self, name):
         self.name = "Guest" if name is None else name
+
+
 
 user = User(None)
 @app.route("/")
@@ -43,31 +48,29 @@ def user_signin():
         username = flask.request.form["username"]
         password = flask.request.form["password"]
         name = flask.request.form["name"]
+        age = flask.request.form["age"]
         lastname = flask.request.form["lastname"]
         password2 = flask.request.form['password2']
-        print [email, username, password, password2, name, lastname] #if password and password2 do not match, return html form with error message on top
+        full_listing = [email, username, password, password2, name, lastname]
+        full_listing1 = [name, lastname, email, password, username, "no"]
+        if not age.isdigit():
+            return flask.render_template("user_login.html", username_taken = '',email_taken='', password_issue = '', age_issue="Please enter a number", incomplete="")
+        if len([i for i in full_listing if i]) != len(full_listing):
+            return flask.render_template("user_login.html", username_taken = '', email_taken = '', password_issue = '', age_issue="", incomplete="Some forms are not filled out")
+
+        if int(age) < 13 or int(age) > 19:
+            return flask.render_template("user_login.html", username_taken = '', email_taken = '', password_issue = '', age_issue="You must be older than 13 years", incomplete="")
+
+        if password != password2:
+            return flask.render_template("user_login.html", username_taken = '', email_taken = '', password_issue = 'Passwords do not match', age_issue="", incomplete="")
+
+        if db_interaction.check_user(email):
+            return flask.render_template("user_login.html", username_taken = '', email_taken = "email already taken", password_issue = '', age_issue="", incomplete="")
+        db_interaction.add_user(*full_listing1)
+        #print [email, username, password, password2, name, lastname] #if password and password2 do not match, return html form with error message on top
         return flask.redirect("/")#here, will have to redirect to login page, not homepage
     else:
-        return flask.render_template("user_login.html", username_taken = '', password_issue = '')
-
-
-if __name__=="__main__":
-	app.debug = True;
-app.run()
-
-
-
-@app.route("/form_data", methods=["GET", "POST"])
-def user_signin():
-    if flask.request.method == "POST":
-        email = flask.request.form["email"]
-        username = flask.request.form["username"]
-        password = flask.request.form["password"]
-        password2 = flask.request.form['password2']
-        print [email, username, password, password2] #if password and password2 do not match, return html form with error message on top
-        return flask.redirect("/")#here, will have to redirect to login page, not homepage
-    else:
-        return flask.render_template("user_login.html")
+        return flask.render_template("user_login.html", username_taken = '', email_taken = '', password_issue = '')
 
 
 if __name__=="__main__":
